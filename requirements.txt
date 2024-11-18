@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+# flask
+pandas
+# flask-cors
