@@ -276,7 +276,7 @@ async def filter_by_amount_range(
         elif range_option == '5m_10m':
             mask = (df_copy['credit'] >= 5000000) & (df_copy['credit'] <= 10000000)
         elif range_option == '10m_15m':
-             mask = (df_copy['credit'] >= 10000000) & (df_copy['credit'] <= 15000000)
+             mask = (df_copy['credit'] >= 10000000) & (df_copy['credit'] <= 50000000)
         elif min_amount is not None and max_amount is not None:
             mask = (df_copy['credit'] >= min_amount) & (df_copy['credit'] <= max_amount)
         elif min_amount is not None:
@@ -333,12 +333,24 @@ async def unified_filter(
         # Xử lý amount_range và min_amount/max_amount như cũ
         if amount_range:
             if amount_range == "under_5m":
-                filtered_df = filtered_df[filtered_df['credit'] < 5000000]
+                filtered_df = filtered_df[filtered_df['credit'] < 50000000]
             elif amount_range == "5m_10m":
                 filtered_df = filtered_df[
-                    (filtered_df['credit'] >= 5000000) & 
+                    (filtered_df['credit'] >= 50000000) & 
                     (filtered_df['credit'] <= 10000000)
                 ]
+            elif amount_range == "10m_50m":
+                filtered_df = filtered_df[
+                    (filtered_df['credit'] >= 10000000) & 
+                    (filtered_df['credit'] <= 50000000)
+                ]
+            elif amount_range == "50m_100m":
+                filtered_df = filtered_df[
+                    (filtered_df['credit'] >= 50000000) &
+                    (filtered_df['credit'] <= 100000000)
+                ]
+            elif amount_range == "above_100m":
+                    filtered_df = filtered_df[filtered_df['credit'] > 100000000]
             # ... (giữ nguyên các range khác)
 
         if min_amount is not None and max_amount is not None:
