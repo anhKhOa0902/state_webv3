@@ -31,7 +31,6 @@ class DataManager:
     def __init__(self):
         self.df = None
         self.load_data()
-
     def load_data(self):
         try:
             # Đọc file CSV với các kiểu dữ liệu được chỉ định
@@ -51,12 +50,42 @@ class DataManager:
             
             # Loại bỏ các dòng có giá trị NaN trong các cột quan trọng
             self.df = self.df.dropna(subset=['credit', 'date'])
+            
+            # LƯU Ý: KHÔNG set_index trực tiếp vào self.df
+            # Thay vào đó, tạo một index riêng nếu cần
+            self.df.index = range(len(self.df))
+            
             logger.info(f"Data loaded successfully. Shape: {self.df.shape}")
             
         except Exception as e:
-            logger.error(f"Error loading CSV: {str(e)}")
-            self.df = pd.DataFrame()
-            raise
+                logger.error(f"Error loading CSV: {str(e)}")
+                self.df = pd.DataFrame()
+                raise
+    # def load_data(self):
+    #     try:
+    #         # Đọc file CSV với các kiểu dữ liệu được chỉ định
+    #         self.df = pd.read_csv('chuyen_khoan.csv', dtype={
+    #             'credit': 'float64',
+    #             'date_time': 'str',
+    #             'detail': 'str',
+    #         })
+            
+    #         # Xử lý cột date_time
+    #         if 'date_time' in self.df.columns:
+    #             self.df[['date', 'trans_id']] = self.df['date_time'].str.split('_', expand=True)
+    #             self.df['date'] = pd.to_datetime(self.df['date'], format='%d/%m/%Y', errors='coerce')
+            
+    #         # Chuyển đổi và làm sạch cột credit
+    #         self.df['credit'] = pd.to_numeric(self.df['credit'], errors='coerce')
+            
+    #         # Loại bỏ các dòng có giá trị NaN trong các cột quan trọng
+    #         self.df = self.df.dropna(subset=['credit', 'date'])
+    #         logger.info(f"Data loaded successfully. Shape: {self.df.shape}")
+            
+    #     except Exception as e:
+    #         logger.error(f"Error loading CSV: {str(e)}")
+    #         self.df = pd.DataFrame()
+    #         raise
 
     def paginate_results(self, df: pd.DataFrame, page: int = 1, page_size: int = 100) -> pd.DataFrame:
         try:
@@ -312,7 +341,7 @@ async def unified_filter(
     min_amount: Optional[float] = Query(None, description="Minimum amount for custom range"),
     max_amount: Optional[float] = Query(None, description="Maximum amount for custom range"),
     page: int = Query(1, ge=1, description="Page number"),
-    page_size: int = Query(100, ge=1, le=1000, description="Items per page")
+    page_size: int = Query(10, ge=1, le=500, description="Items per page")
 ):
     try:
         # Áp dụng tìm kiếm đa trường trước
@@ -336,7 +365,7 @@ async def unified_filter(
                 filtered_df = filtered_df[filtered_df['credit'] < 50000000]
             elif amount_range == "5m_10m":
                 filtered_df = filtered_df[
-                    (filtered_df['credit'] >= 50000000) & 
+                    (filtered_df['credit'] >= 5000000) & 
                     (filtered_df['credit'] <= 10000000)
                 ]
             elif amount_range == "10m_50m":
