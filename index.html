@@ -14,62 +14,101 @@
 </head>
 
 <body>
-    <h1>Transaction Filter</h1>
-    <div class="search-container">
-        <div class="search-box ">
-            <input type="text" id="search_keyword" class="search-input" placeholder="Search by keyword...">
-            <button class="filter-button" onclick="toggleFilters()">Filters</button>
-            <button class="filter-button" onclick="applyFilters()">Search</button>
-        </div>
+    <div class="container">
+        <h1>Transaction Filter</h1>
+        <div class="search-container">
+            <div class="search-box ">
+                <input type="text" id="search_keyword" class="search-input" placeholder="Search by keyword...">
+                <button class="filter-button" onclick="toggleFilters()">Filters</button>
+                <button class="filter-button" onclick="applyFilters()">Search</button>
+            </div>
 
-        <div id="filter_panel" class="filter-panel">
-            <div class="date-filters">
-                <!-- <input type="text" id="start_date" placeholder="Start Date (DD/MM/YYYY)">
+            <div id="filter_panel" class="filter-panel">
+                <h3>Date</h3>
+                <div class="date-filters">
+                    <!-- <input type="text" id="start_date" placeholder="Start Date (DD/MM/YYYY)">
                 <input type="text" id="end_date" placeholder="End Date (DD/MM/YYYY)"> -->
-                <div class="form-group">
-                    <label for="start_date">Start Date:</label>
-                    <input type="text" id="start_date" placeholder="Select Start Date">
-                </div>
-                <div class="form-group">
-                    <label for="end_date">End Date:</label>
-                    <input type="text" id="end_date" placeholder="Select End Date">
-                </div>
-            </div>
-
-            <div class="amount-filters">
-                <div class="amount-buttons">
-                    <button class="amount-button" data-range="under_5m">Dưới 5 triệu</button>
-                    <button class="amount-button" data-range="5m_10m">5-10 triệu</button>
-                    <button class="amount-button" data-range="10m_50m">10-50 triệu</button>
-                    <button class="amount-button" data-range="50m_100m">50-100 triệu</button>
-                    <button class="amount-button" data-range="above_100m">Trên 100 triệu</button>
+                    <div class="form-group">
+                        <label for="start_date">Start Date:</label>
+                        <input type="text" id="start_date" placeholder="Select Start Date">
+                    </div>
+                    <div class="form-group">
+                        <label for="end_date">End Date:</label>
+                        <input type="text" id="end_date" placeholder="Select End Date">
+                    </div>
                 </div>
 
-                <div class="custom-range">
-                    <input type="number" id="min_amount" placeholder="Min amount">
-                    <input type="number" id="max_amount" placeholder="Max amount">
+                <div class="amount-filters">
+                    <div class="amount-buttons">
+                        <button class="amount-button" data-range="under_5m">Dưới 5 triệu</button>
+                        <button class="amount-button" data-range="5m_10m">5-10 triệu</button>
+                        <button class="amount-button" data-range="10m_50m">10-50 triệu</button>
+                        <button class="amount-button" data-range="50m_100m">50-100 triệu</button>
+                        <button class="amount-button" data-range="above_100m">Trên 100 triệu</button>
+                    </div>
+
+                    <div class="custom-range">
+                        <input type="number" id="min_amount" placeholder="Min amount">
+                        <input type="number" id="max_amount" placeholder="Max amount">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="results">
-        <div id="loading" class="loading" style="display: none;">Loading...</div>
-        <div id="no_data" class="no-data" style="display: none;">No transactions found</div>
-        <table id="data_table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Transaction ID</th>
-                    <th>Amount</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-            <tbody id="data_body"></tbody>
-        </table>
-        <div class="pagination" id="pagination"></div>
+        <div id="results">
+            <div id="loading" class="loading" style="display: none;">Loading...</div>
+            <div id="no_data" class="no-data" style="display: none;">No transactions found</div>
+            <table id="data_table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Transaction ID</th>
+                        <th>Amount</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody id="data_body"></tbody>
+            </table>
+            <div class="pagination" id="pagination"></div>
+        </div>
     </div>
-
+    <footer class="footer">
+        <div class="grid-container">
+            <div class="footer-content-1">
+                <h3>Transaction Filter</h3>
+                <p>Tra cứu sao kê Ủy ban Mặt trận Tổ quốc</p>
+                <p>Nhanh chóng. Chính xác. Tiện lợi.</p>
+                <li class="social-media">
+                    <a href="" class="footer-item">
+                        <i class="fa-brands fa-facebook fa-lg"></i>
+                    </a>
+                    <a href="" class="footer-item">
+                        <i class="fa-brands fa-instagram fa-lg"></i>
+                    </a>
+                    <a href="" class="footer-item">
+                        <i class="fa-brands fa-youtube fa-lg"></i>
+                    </a>
+                    <a href="" class="footer-item">
+                        <i class="fa-brands fa-twitter fa-lg"></i>
+                    </a>
+                </li>
+            </div>
+            <div class="footer-content-2">
+                <h3>Contact Information</h3>
+                <h4>Phone</h4>
+                <p>(250) 666 1314</p>
+                <h4>Email</h4>
+                <p>transactionfilter@gmail.com</p>
+            </div>
+            <div class="footer-content-3">
+                <h3>Scan Me</h3>
+                <img src="./img/qrcode.png" alt="QR Code" class="QRCode" />
+            </div>
+        </div>
+        <div class="bottom-bar">
+            <h5>&copy; 2024 Bao cao Lap trinh nang cao. All rights reserved</h5>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="script.js"></script>
 </body>
