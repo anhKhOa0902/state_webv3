@@ -1,5 +1,9 @@
 fastapi
 uvicorn
-# flask
 pandas
-# flask-cors
+python-multipart
+python-jose
+python-dotenv
+python-multipart
+python-jose
+passlib
