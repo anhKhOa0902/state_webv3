@@ -7,32 +7,44 @@ Dự án này bao gồm hai thành phần chính:
 
 
 Mỗi thành phần có thể chạy độc lập như một server riêng. Bạn cần cấu hình client sao cho phù hợp tùy thuộc vào server đang chạy.
-### Cài môi trường ảo
+### Step 1: Clone the repository 
 
 ```
-    pip install venv
-
-    venv/Scripts/activate 
+    git clone <repository-url>
+    cd <repository-folder>
 ```
 
-Cài đặt các phụ thuộc bằng lệnh:
+
+#### Step 2: Build the Docker image:
+    docker-compose build
+
+##### Step 3: Start the application:
+    Để chạy server , sử dụng lệnh sau:
+
+    ```bash
+            docker-compose up
+    ```
+###### Step 4: Access the application:
+    API: http://localhost:8000/docs (Swagger documentation).
+
+    Frontend: Open index.html in a browser or serve it with a static file server.
+###### Step 5: Stop the application:
+    ```
+        docker-compose down
+    ```
+###### Local Development (Without Docker)
+Install dependencies:
+    Cài đặt các phụ thuộc bằng lệnh:
 ```bash
 pip install -r requirements.txt
 ```
-#### Cách Chạy Server
 
-##### FastAPI
-Để chạy server FastAPI, sử dụng lệnh sau:
+Run the application:
+    ```bash 
+        uvicorn main:app --reload
+    ```
+Access the application:
 
-```bash
-uvicorn main:app --reload
-```
+API: http://127.0.0.1:8000/docs
 
-Lệnh này sẽ khởi động server tại `http://localhost:8000`. Trong file JavaScript client (`script.js`), hãy thiết lập cổng là `8000` khi sử dụng FastAPI.
-###### Go live
-```
-    Go live file index.html
-```
-
-
-
+Frontend: Open index.html in a browser or serve it with a static file server.
