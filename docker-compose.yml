@@ -3,10 +3,11 @@ version: '3.9'
 services:
   web:
     build: .
+    image: <your-dockerhub-username>/transaction-filter:latest  # Image sẽ được push lên Docker Hub
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
+      - .:/app  # Đồng bộ mã nguồn
     environment:
       - PYTHONUNBUFFERED=1
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn main:app --host 0.0.0.0 --port 8000

@@ -1,4 +1,4 @@
-# Sử dụng Python 3.10 hoặc mới hơn
+# Sử dụng image Python chính thức
 FROM python:3.10-slim
 
 # Thiết lập thư mục làm việc
@@ -10,11 +10,11 @@ COPY requirements.txt .
 # Cài đặt các thư viện cần thiết
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Sao chép mã nguồn vào container
+# Sao chép toàn bộ mã nguồn vào container
 COPY . .
 
-# Expose port 8000
+# Expose port 8000 để ứng dụng có thể nhận yêu cầu từ bên ngoài
 EXPOSE 8000
 
-# Khởi động ứng dụng với Uvicorn
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+# Lệnh khởi chạy ứng dụng
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
