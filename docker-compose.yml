@@ -3,7 +3,7 @@ version: '3.9'
 services:
   web:
     build: .
-    image: <your-dockerhub-username>/transaction-filter:latest  # Image sẽ được push lên Docker Hub
+    image: anhkhoa01010902/kai_t367_statewebv3:v1.2  # Image sẽ được push lên Docker Hub
     ports:
       - "8000:8000"
     volumes:
