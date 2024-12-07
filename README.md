@@ -13,7 +13,7 @@
         ```
         Step 2: Start container from image and Run project
         ```
-            docker run -p 8000:8000 anhkhoa01010902/kai_t367_statewebv3:tagname
+            docker run -p 8000:8000 anhkhoa01010902/kai_t367_statewebv3:v1.2
 
 
 ### NORMAL WAY RUN PROJECT:: 
