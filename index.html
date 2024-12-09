@@ -9,6 +9,7 @@
     <!-- Tailwind CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -18,33 +19,35 @@
         <h1>Transaction Filter</h1>
         <div class="search-container">
             <div class="search-box ">
+                <input type="text" id="detail_search" class="search-input" placeholder="Tìm theo nội dung chuyển khoản">
                 <input type="text" id="search_keyword" class="search-input" placeholder="Search by keyword...">
                 <button class="filter-button" onclick="toggleFilters()">Filters</button>
                 <button class="filter-button" onclick="applyFilters()">Search</button>
             </div>
 
             <div id="filter_panel" class="filter-panel">
-                <h3>Date</h3>
+                <!-- <h4 style="color: black;">Search Filters</h3> -->
                 <div class="date-filters">
                     <!-- <input type="text" id="start_date" placeholder="Start Date (DD/MM/YYYY)">
                 <input type="text" id="end_date" placeholder="End Date (DD/MM/YYYY)"> -->
+
                     <div class="form-group">
-                        <label for="start_date">Start Date:</label>
+                        <!-- <label for="start_date">Start Date:</label> -->
                         <input type="text" id="start_date" placeholder="Select Start Date">
                     </div>
                     <div class="form-group">
-                        <label for="end_date">End Date:</label>
+                        <!-- <label for="end_date">End Date:</label> -->
                         <input type="text" id="end_date" placeholder="Select End Date">
                     </div>
                 </div>
 
                 <div class="amount-filters">
                     <div class="amount-buttons">
-                        <button class="amount-button" data-range="under_5m">Dưới 5 triệu</button>
-                        <button class="amount-button" data-range="5m_10m">5-10 triệu</button>
-                        <button class="amount-button" data-range="10m_50m">10-50 triệu</button>
-                        <button class="amount-button" data-range="50m_100m">50-100 triệu</button>
-                        <button class="amount-button" data-range="above_100m">Trên 100 triệu</button>
+                        <button class="amount-button" data-range="under_5m"> Dưới 5M </button>
+                        <button class="amount-button" data-range="5m_10m">5 - 10M</button>
+                        <button class="amount-button" data-range="10m_50m">10 - 50M</button>
+                        <button class="amount-button" data-range="50m_100m">50 - 100M</button>
+                        <button class="amount-button" data-range="above_100m"> Trên 100M</button>
                     </div>
 
                     <div class="custom-range">
@@ -106,7 +109,7 @@
             </div>
         </div>
         <div class="bottom-bar">
-            <h5>&copy; 2024 Bao cao Lap trinh nang cao. All rights reserved</h5>
+            <h5>&copy;2024 Bao cao Lap trinh nang cao. All rights reserved</h5>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

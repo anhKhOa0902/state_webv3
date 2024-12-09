@@ -402,6 +402,53 @@ async def unified_filter(
     except Exception as e:
         logger.error(f"Error in unified filter: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+@app.get('/api/filter/detail')
+async def search_by_detail(
+    detail_keyword: str = Query(..., description="Keyword to search in transaction details"),
+    page: int = Query(1, ge=1, description="Page number"),
+    page_size: int = Query(100, ge=1, le=1000, description="Items per page")
+):
+    try:
+        logger.info(f"Detail search request: keyword={detail_keyword}")
+
+        # Tạo một bản sao của dataframe để tránh ảnh hưởng đến dữ liệu gốc
+        df_copy = data_manager.df.copy()
+
+        # Lọc các dòng có chứa từ khóa trong cột detail
+        # Sử dụng case-insensitive search
+        filtered_df = df_copy[
+            df_copy['detail'].str.contains(detail_keyword, case=False, na=False)
+        ]
+
+        # Tính tổng số bản ghi thoả mãn điều kiện
+        total_records = len(filtered_df)
+
+        # Nếu không tìm thấy kết quả
+        if total_records == 0:
+            return JSONResponse(content={
+                "total_records": 0,
+                "page": page,
+                "page_size": page_size,
+                "total_pages": 0,
+                "data": []
+            })
+
+        # Phân trang kết quả
+        paginated_df = data_manager.paginate_results(filtered_df, page, page_size)
+
+        # Chuẩn bị và trả về response
+        response_data = {
+            "total_records": total_records,
+            "page": page,
+            "page_size": page_size,
+            "total_pages": -(-total_records // page_size),  # Ceiling division
+            "data": paginated_df.to_dict(orient="records")
+        }
+        return JSONResponse(content=response_data)
+
+    except Exception as e:
+        logger.error(f"Error in detail search: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 @app.get("/health")
 async def health_check():
     return {"status": "OK"}

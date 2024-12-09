@@ -267,7 +267,49 @@ function debounce(func, wait) {
 // Cập nhật placeholder của ô search để thông báo cho user
 document.getElementById('search_keyword').placeholder =
     "Tìm theo ngày (DD/MM/YYYY), mã GD, nội dung, số tiền (5tr, 5m...)";
+    async function searchByDetail() {
+        const detailKeyword = document.getElementById('detail_search').value;
+        
+        if (!detailKeyword) {
+            // If no keyword, reset to default view or show all
+            currentPage = 1;
+            await applyFilters();
+            return;
+        }
+    
+        showLoading();
+    
+        try {
+            // Reset to first page when doing a new search
+            currentPage = 1;
+            
+            // Use the new dedicated detail search endpoint
+            const url = `${API_BASE_URL}/filter/detail?detail_keyword=${encodeURIComponent(detailKeyword)}&page=${currentPage}&page_size=${pageSize}`;
+            
+            const data = await fetchWithError(url);
+    
+            if (data.total_records === 0) {
+                showNoData();
+                return;
+            }
+    
+            displayData(data.data);
+            totalPages = data.total_pages;
+            createPagination(currentPage, totalPages);
+            hideLoading();
+        } catch (error) {
+            console.error('Error searching by detail:', error);
+            hideLoading();
+            showNoData();
+        }
+    }
+    document.getElementById('detail_search').addEventListener('keyup', function(e) {
+        if (e.key === 'Enter') {
+            searchByDetail();
+        }
+    });
 //them
+
 flatpickr("#start_date", {
     dateFormat: "d/m/Y", // Định dạng DD/MM/YYYY
 });

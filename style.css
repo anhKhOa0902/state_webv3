@@ -111,6 +111,7 @@
         }
         
         .amount-buttons {
+            height: 4rem;
             display: grid;
             column-gap: 40px;
             grid-template-columns: auto auto auto auto auto;
@@ -187,19 +188,36 @@
             }
             .date-filters,
             .amount-filters {
-                flex-direction: column;
+                flex-direction: row;
+                flex-wrap: nowrap !important;
             }
             table {
                 font-size: 0.85rem;
             }
         }
         
-        .form-group {
-            display: flex;
-            align-items: center;
-            /* Căn giữa theo chiều dọc */
-            margin-bottom: 10px;
-            /* Khoảng cách giữa các hàng */
+        .date-filters,
+        .amount-filters {
+            flex-direction: row;
+            flex-wrap: nowrap !important;
+        }
+        
+        .date-filters {
+            margin-bottom: 2%;
+        }
+        
+        .custom-range {
+            margin-left: 3%;
+        }
+        
+        .custom-range #min_amount,
+        #max_amount {
+            width: 80%;
+            font-size: 0.9rem;
+        }
+        
+        .date-filters .form-group {
+            width: 40%;
         }
         
         .form-group label {
@@ -253,6 +271,7 @@
             position: relative;
             left: 0;
             bottom: 0;
+            padding: 10px;
         }
         /* footer {
             padding: 10px 10px 0;
@@ -313,6 +332,10 @@
         .footer-content-1 h3,
         p {
             margin: 10px;
+        }
+        
+        .footer-content-1 li {
+            padding: 10px;
         }
         
         .social-media {
