@@ -8,7 +8,7 @@
 ## Run project by via DockerHub
         Step 1: Pull project
         ```
-            docker pull anhkhoa01010902/kai_t367_statewebv3:tagname
+            docker pull anhkhoa01010902/kai_t367_statewebv3:tagname #latest version
 
         ```
         Step 2: Start container from image and Run project
